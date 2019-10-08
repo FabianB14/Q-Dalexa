@@ -25,10 +25,23 @@ const SatrtGameIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'StartGameIntent';
   },
   handle(handlerInput) {
+    const speechText = 'Give me a category, difficulty, and number of questions';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('You could choose categories like Japanese Anime & Manga, Video Games, Geography or Science & Nature ')
+      .getResponse();
+  }
+};
+const GameSetupIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'GameSetupIntent';
+  },
+  handle(handlerInput) {
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
-    const speakOutput = 'I am generating ' + numberOfquestions + ' number of ' + difficulty + ' questions.';
+    const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
     //const speechText = 'Ready to Start!';
     var input = {
       'category': category,
@@ -53,6 +66,8 @@ const SatrtGameIntentHandler = {
       .getResponse();
   }
 };
+
+
 
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
