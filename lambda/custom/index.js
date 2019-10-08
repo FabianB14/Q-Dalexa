@@ -2,9 +2,7 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
-var lambda = new aws.Lambda({
-  region: 'us-west-2' //change to your region
-});
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
@@ -17,7 +15,9 @@ const LaunchRequestHandler = {
         .getResponse();
     }
 };
-
+var lambda = new aws.Lambda({
+  region: 'us-west-2' //change to your region
+});
 const SatrtGameIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
