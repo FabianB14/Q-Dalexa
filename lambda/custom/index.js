@@ -25,7 +25,7 @@ const SatrtGameIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'StartGameIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Give me a category, difficulty, and number of questions';
+    const speechText = 'Choose a category, a difficulty and a number of questions';
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('You could choose categories like Japanese Anime & Manga, Video Games, Geography or Science & Nature ')
