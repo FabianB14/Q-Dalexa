@@ -43,10 +43,7 @@
                     "slots": [
                         {
                             "name": "NumberOfQuestions",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "{NumberOfQuestions}"
-                            ]
+                            "type": "AMAZON.NUMBER"       
                         },
                         {
                             "name": "Difficulty",
@@ -140,7 +137,7 @@
                     ]
                 }
             ]
-        }
+        
         }
     }
 }
