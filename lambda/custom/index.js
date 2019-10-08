@@ -16,17 +16,23 @@ const LaunchRequestHandler = {
         .getResponse();
     }
 };
+<<<<<<< HEAD
+=======
 
 var lambda = new aws.Lambda({
   region: 'us-west-2' //change to your region
 });
 
+>>>>>>> 2396bae50ed90b7af3e955278a5a4ec621a07c2a
 const SatrtGameIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'StartGameIntent';
   },
   handle(handlerInput) {
+    var lambda = new aws.Lambda({
+      region: 'us-west-2' //change to your region
+    });
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
