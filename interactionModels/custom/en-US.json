@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "hello node",
+            "invocationName": "q an dalexa",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -26,6 +26,13 @@
                         "hi",
                         "say hello world",
                         "say hello"
+                    ]
+                },
+                {
+                    "name": "StartGameIntent",
+                    "slots": [],
+                    "samples": [
+                        "single player"
                     ]
                 }
             ],

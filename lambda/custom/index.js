@@ -2,19 +2,57 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
-
+var lambda = new aws.Lambda({
+  region: 'us-west-2' //change to your region
+});
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-      const speechText = 'Welcome, you can say Hello or Help. Which would you like to try?';
+      const speechText = 'Welcome to Q an Dalexa, choose a mode.';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
         .getResponse();
     }
 };
+
+const SatrtGameIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'StartGameIntent';
+  },
+  handle(handlerInput) {
+    const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
+    const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
+    const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
+    const speakOutput = 'I am generating ' + numberOfquestions + ' number of ' + difficulty + ' questions.';
+    //const speechText = 'Ready to Start!';
+    var input = {
+      'category': category,
+      'difficulty':difficulty,
+      'numberOfQuestions': numberOfquestions
+    };
+    lambda.invoke({
+      FunctionName: 'retrieveFromDB',
+      Payload: JSON.stringify(input), // pass params
+      InvocationType: 'Event'
+     }, function(error, data) {
+      if (error) {
+        context.done('error', error);
+      }
+      if(data.Payload){
+       context.succeed(data.Payload)
+      }
+     });
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+      .getResponse();
+  }
+};
+
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -108,6 +146,7 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
+    SatrtGameIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
