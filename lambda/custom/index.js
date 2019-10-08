@@ -3,6 +3,9 @@
 // session persistence, api calls, and more.
 const aws = require('aws-sdk');
 const Alexa = require('ask-sdk-core');
+var lambda = new aws.Lambda({
+  region: 'us-west-2' //change to your region
+});
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -22,9 +25,6 @@ const SatrtGameIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'StartGameIntent';
   },
   handle(handlerInput) {
-    var lambda = new aws.Lambda({
-      region: 'us-west-2' //change to your region
-    });
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
