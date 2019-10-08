@@ -39,6 +39,7 @@ const GameSetupIntentHandler = {
   },
   handle(handlerInput) {
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
+    console.log(difficulty);
     const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
     const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
@@ -66,9 +67,6 @@ const GameSetupIntentHandler = {
       .getResponse();
   }
 };
-
-
-
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
