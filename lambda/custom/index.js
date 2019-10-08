@@ -28,7 +28,7 @@ const SatrtGameIntentHandler = {
     const speechText = 'Choose a category, a difficulty and a number of questions';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('You could choose categories like Japanese Anime & Manga, Video Games, Geography or Science & Nature')
+      .reprompt('You could choose categories like Japanese Anime and Manga, Video Games, Geography or Science & Nature')
       .getResponse();
   }
 };
