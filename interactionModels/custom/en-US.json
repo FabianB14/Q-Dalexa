@@ -32,7 +32,10 @@
                     "name": "StartGameIntent",
                     "slots": [],
                     "samples": [
-                        "single player"
+                        "single player",
+                        "solo",
+                        "singleplayer mode",
+                        "oneplayer"
                     ]
                 }
             ],
