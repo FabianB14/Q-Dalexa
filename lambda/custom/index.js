@@ -19,6 +19,10 @@ const LaunchRequestHandler = {
     }
 };
 
+var lambda = new aws.Lambda({
+  region: 'us-west-2' //change to your region
+});
+
 const SatrtGameIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
