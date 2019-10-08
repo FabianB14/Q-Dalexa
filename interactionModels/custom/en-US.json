@@ -63,7 +63,84 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "Difficulties",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "medium",
+                                "synonyms": [
+                                    "Medium"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "easy",
+                                "synonyms": [
+                                    "Easy"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hard",
+                                "synonyms": [
+                                    "Hard"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AMAZON.Genre",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Anime",
+                                "synonyms": [
+                                    "anime"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Topic",
+                                "synonyms": [
+                                    "topic"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Category",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Science and Nature"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Geography"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Video Games"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Japanese Anime and Manga"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
         }
     }
 }
