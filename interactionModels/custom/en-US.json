@@ -37,6 +37,30 @@
                         "singleplayer mode",
                         "oneplayer"
                     ]
+                },
+                {
+                    "name": "GameSetupIntent",
+                    "slots": [
+                        {
+                            "name": "NumberOfQuestions",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{NumberOfQuestions}"
+                            ]
+                        },
+                        {
+                            "name": "Difficulty",
+                            "type": "Difficulties"
+                        },
+                        {
+                            "name": "Category",
+                            "type": "Category"
+                        }
+                    ],
+                    "samples": [
+                        "{Category} {Difficulty} {NumberOfQuestions}",
+                        "{NumberOfQuestions} {Difficulty} {Category} questions"
+                    ]
                 }
             ],
             "types": []
