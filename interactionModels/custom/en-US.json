@@ -39,6 +39,15 @@
                     ]
                 },
                 {
+                    "name": "AskQuestionIntent",
+                    "slots": [],
+                    "samples": [
+                        "start game",
+                        "ready to go",
+                        "next question",
+                    ]
+                },
+                {
                     "name": "GameSetupIntent",
                     "slots": [
                         {
@@ -126,12 +135,12 @@
                         },
                         {
                             "name": {
-                                "value": "Video Games"
+                                "value": "History"
                             }
                         },
                         {
                             "name": {
-                                "value": "Japanese Anime and Manga"
+                                "value": "General Knowledge"
                             }
                         }
                     ]
