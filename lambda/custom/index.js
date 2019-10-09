@@ -38,7 +38,8 @@ const GameSetupIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GameSetupIntent';
   },
   handle(handlerInput) {
-   var category = handlerInput.requestEnvelope.request.intent.slots.Category.value;
+   var category = handlerInput.requestEnvelope.request.intent.slots['Category'].value;
+   console.log(category);
    var difficulty = handlerInput.requestEnvelope.request.intent.slots.Difficulty.value;
    var numberOfQuestions = handlerInput.requestEnvelope.request.intent.slots.NumberofQuestions.value;
     // const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
@@ -50,7 +51,7 @@ const GameSetupIntentHandler = {
     var input = {
       'category': category,
        'difficulty':difficulty,
-       'numberOfQuestions': numberOfquestions
+       'numberOfQuestions': numberOfQuestions
     };
     lambda.invoke({
       FunctionName: 'retrieveFromDB',
