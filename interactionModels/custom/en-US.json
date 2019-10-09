@@ -39,6 +39,15 @@
                     ]
                 },
                 {
+                    "name": "AskQuestionIntent",
+                    "slots": [],
+                    "samples": [
+                        "start game",
+                        "ready to go",
+                        "next question",
+                    ]
+                },
+                {
                     "name": "GameSetupIntent",
                     "slots": [
                         {
