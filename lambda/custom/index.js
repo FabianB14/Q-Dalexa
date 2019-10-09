@@ -79,7 +79,6 @@ const AskQuestionIntentHandler = {
     const speechText = 'Choose a different category difficulty or number of questions ';
     lambda.invoke({
       FunctionName: 'getQuestionsFromQueue',
-      Payload: JSON.stringify(input), // pass params
       InvocationType: 'RequestResponse'
      }, function(error, data) {
       if (error) {
@@ -87,7 +86,7 @@ const AskQuestionIntentHandler = {
       }
       if(data){
        console.log('This should show the payload'+ data.Payload)
-       const speechText = data.Payload;
+       const speechText = data.Payload[0];
       }
      });
     return handlerInput.responseBuilder
