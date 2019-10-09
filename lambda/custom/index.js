@@ -38,16 +38,19 @@ const GameSetupIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GameSetupIntent';
   },
   handle(handlerInput) {
-    const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
-    console.log(difficulty);
-    const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
-    const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
+   var category = handlerInput.requestEnvelope.request.intent.slots.Category.value;
+   var difficulty = handlerInput.requestEnvelope.request.intent.slots.Difficulty.value;
+   var numberOfQuestions = handlerInput.requestEnvelope.request.intent.slots.NumberofQuestions.value;
+    // const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
+    
+    // const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
+     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
     const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
     //const speechText = 'Ready to Start!';
     var input = {
       'category': category,
-      'difficulty':difficulty,
-      'numberOfQuestions': numberOfquestions
+       'difficulty':difficulty,
+       'numberOfQuestions': numberOfquestions
     };
     lambda.invoke({
       FunctionName: 'retrieveFromDB',
