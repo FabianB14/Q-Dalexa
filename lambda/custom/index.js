@@ -70,6 +70,32 @@ const GameSetupIntentHandler = {
       .getResponse();
   }
 };
+const AskQuestionIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AskQuestionIntent';
+  },
+  handle(handlerInput) {
+    const speechText = 'Choose a different category difficulty or number of questions ';
+    lambda.invoke({
+      FunctionName: 'getQuestionsFromQueue',
+      Payload: JSON.stringify(input), // pass params
+      InvocationType: 'RequestResponse'
+     }, function(error, data) {
+      if (error) {
+        console.log('This is an error'+ error);
+      }
+      if(data){
+       console.log('This should show the payload'+ data.Payload)
+       const speechText = data.Payload;
+      }
+     });
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('You could choose categories like Japanese Anime and Manga, Video Games, Geography or Science and Nature')
+      .getResponse();
+  }
+};
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
