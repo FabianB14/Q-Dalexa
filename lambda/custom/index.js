@@ -65,7 +65,7 @@ const GameSetupIntentHandler = {
       }
      });
     return handlerInput.responseBuilder
-      .speak(speakOutput)
+      .speak(speakOutput).addDelegateDirective('AskQuestionIntent')
       //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
       .getResponse();
   }
