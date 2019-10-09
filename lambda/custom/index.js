@@ -60,8 +60,8 @@ const GameSetupIntentHandler = {
       if (error) {
         console.log('This is an error'+ error);
       }
-      if(data.Payload){
-       console.log('This should show the payload'+ data.Payload)
+      if(data){
+       console.log('This should show the payload'+ data)
       }
      });
     return handlerInput.responseBuilder
