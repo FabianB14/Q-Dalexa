@@ -44,7 +44,7 @@ const GameSetupIntentHandler = {
     // const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     
     // const numberOfquestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
-     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
+    //const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
     const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
     //const speechText = 'Ready to Start!';
     var input = {
