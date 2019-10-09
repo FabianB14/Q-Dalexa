@@ -44,6 +44,7 @@ const GameSetupIntentHandler = {
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfQuestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
+    console.log(category)
     const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
     //const speechText = 'Ready to Start!';
     var input = {
@@ -57,10 +58,10 @@ const GameSetupIntentHandler = {
       InvocationType: 'Event'
      }, function(error, data) {
       if (error) {
-        context.done('error', error);
+        console.log('This is an error'+ error);
       }
       if(data.Payload){
-       context.succeed(data.Payload)
+       console.log('This should show the payload'+ data.Payload)
       }
      });
     return handlerInput.responseBuilder
