@@ -65,8 +65,8 @@ const GameSetupIntentHandler = {
       }
      });
     return handlerInput.responseBuilder
-      .speak(speakOutput).shouldEndSession(false)
-      //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+      .speak(speakOutput)
+      .reprompt(speakOutput)
       .getResponse();
   }
 };
