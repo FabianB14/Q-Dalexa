@@ -93,7 +93,6 @@ const AskQuestionIntentHandler = {
         // console.log(sessionAttributes.speechText);
       }
      });
-     console.log('Test one'+ test.data.Payload)
     console.log('Test two'+ test.Payload.read().decode())
     console.log('Test three'+test.Payload.read())
     console.log('Test four'+test.Payload)
