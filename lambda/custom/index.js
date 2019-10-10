@@ -87,13 +87,15 @@ const AskQuestionIntentHandler = {
       }
       if(data){
         console.log('This should show the payload'+ data.Payload);
-        var arrOfSpeech = data.Payload.split('||');
-        sessionAttributes.speechText = arrOfSpeech[0];
-        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-        console.log(sessionAttributes.speechText);
+        // var arrOfSpeech = data.Payload.split('||');
+        // sessionAttributes.speechText = arrOfSpeech[0];
+        // handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        // console.log(sessionAttributes.speechText);
       }
      });
-    console.log(sessionAttributes.speechText);
+    console.log(test['Payload'].read())
+    console.log('Im am here')
+    // console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
       .speak('Ok look here')
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
