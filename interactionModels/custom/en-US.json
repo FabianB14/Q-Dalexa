@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "q an dalexa",
+            "invocationName": "skynet backwards",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -14,6 +14,20 @@
                 {
                     "name": "AMAZON.StopIntent",
                     "samples": []
+                },
+                {
+                    "name": "AnswerIntent",
+                    "slots": [
+                        {
+                            "name": "userAnswer",
+                            "type": "TrueFalse"
+                        }
+                    ],
+                    "samples": [
+                        "i know the answer",
+                        "the answer is {userAnswer}",
+                        "I have an answer"
+                    ]
                 },
                 {
                     "name": "HelloWorldIntent",
@@ -71,6 +85,21 @@
                 }
             ],
             "types": [
+                {
+                    "name": "TrueFalse",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "false"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "true"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "Difficulties",
                     "values": [
