@@ -94,7 +94,6 @@ const AskQuestionIntentHandler = {
      }
    }).promise();
    sessionAttributes.questionAndAnswer = await questReturn.then(x =>JSON.parse((x.Payload)).split('||'));
-   sessionAttributes.questionAndAnswer = JSON.parse(sessionAttributes.questionAndAnswer).split('||');
    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     return handlerInput.responseBuilder
       .speak(sessionAttributes.questionAndAnswer[0])
