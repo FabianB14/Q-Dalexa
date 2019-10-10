@@ -26,7 +26,8 @@
                     "samples": [
                         "i know the answer",
                         "the answer is {userAnswer}",
-                        "I have an answer"
+                        "I have an answer",
+                        "{userAnswer}"
                     ]
                 },
                 {

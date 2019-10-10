@@ -15,7 +15,7 @@ const LaunchRequestHandler = {
       const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
       sessionAttributes.score = 0;
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-      const speechText = 'Welcome to Q an Dalexa, choose a mode.';
+      const speechText = 'Welcome to tenyks, choose a mode.';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -107,11 +107,13 @@ const AnswerIntentHandler = {
           && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerIntent'
   },
   handle(handlerInput) {
+      var CorrectAnswer;
+      var Question;
       var nextIntent = 'QueueUpQuestionIntent';
       const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
       if (sessionAttributes.questionAndAnswer[0] !== 'game over, would you like to hear your score') {
-        const CorrectAnswer = sessionAttributes.questionAndAnswer[1].toLowerCase();
-        const Question = sessionAttributes.questionAndAnswer[0];
+        CorrectAnswer = sessionAttributes.questionAndAnswer[1].toLowerCase();
+        Question = sessionAttributes.questionAndAnswer[0];
       } else {
         return handlerInput.responseBuilder
           .speak('Your score is ' + sessionAttributes.score + ' correct answers out of ' + sessionAttributes.totalQs + ' total questions. If you would like to to play again just provide a number of questions and a difficulty.')
