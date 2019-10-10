@@ -78,9 +78,9 @@ const AskQuestionIntentHandler = {
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     let speechText = 'Choose a different category difficulty or number of questions ';
-   var test = lambda.invoke({
+   var test = await lambda.invoke({
       FunctionName: 'getQuestionsFromQueue',
-      InvocationType: 'RequestResponse'
+      InvocationType: 'Event'
      }, function(error, data) {
       if (error) {
         console.log('This is an error'+ error);
@@ -93,9 +93,11 @@ const AskQuestionIntentHandler = {
         // console.log(sessionAttributes.speechText);
       }
      });
-    console.log('Test two'+ test.Payload.read().decode())
-    console.log('Test three'+test.Payload.read())
-    console.log('Test four'+test.Payload)
+    test.then(data =>{
+      console.log(data)
+      console.log(data.Payload)
+    })
+    console.log('Test one'+ test.Payload)
     console.log('Im am here')
     // console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
