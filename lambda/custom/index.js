@@ -93,10 +93,10 @@ const AskQuestionIntentHandler = {
         console.log(sessionAttributes.speechText);
       }
      });
-    console.log(test);
+    console.log(test.Payload);
     return handlerInput.responseBuilder
       .speak(sessionAttributes.speechText)
-      .reprompt('You could choose categories like Japanese Anime and Manga, Video Games, Geography or Science and Nature')
+      .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }
 };
