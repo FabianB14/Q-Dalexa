@@ -86,19 +86,17 @@ const AskQuestionIntentHandler = {
        console.log('This should show the payload' + data.Payload);
      }
    }).promise();
-    var questionAndAnswer = questReturn.then(x =>JSON.parse((x.Payload)).split('||'))
-    var question = questionAndAnswer.then(x => x[0])
-    var answer = questionAndAnswer.then(x => x[1])
-    console.log('Question'+ questionAndAnswer.then(x => x[0]))
-
-    console.log('Answer'+ questionAndAnswer.then(x => x[1]))
-    // console.log(sessionAttributes.speechText);
+   sessionAttributes.questionAndAnswer = questReturn.then(x =>JSON.parse((x.Payload)).split('||'));
+   handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+    console.log('Question'+ questionAndAnswer.then(x => x[0]));
+    console.log('Answer'+ questionAndAnswer.then(x => x[1]));
     return handlerInput.responseBuilder
       .speak(questionAndAnswer.then(x => JSON.parse(x[0])))
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }
 };
+  
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
