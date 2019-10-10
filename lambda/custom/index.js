@@ -90,7 +90,7 @@ const AskQuestionIntentHandler = {
         var arrOfSpeech = data.Payload.split('||');
         sessionAttributes.speechText = arrOfSpeech[0];
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-        console.log(speechText)
+        console.log(sessionAttributes.speechText);
       }
      });
     
