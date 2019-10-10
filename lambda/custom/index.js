@@ -78,26 +78,26 @@ const AskQuestionIntentHandler = {
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     let speechText = 'Choose a different category difficulty or number of questions ';
-   var test = await lambda.invoke({
-      FunctionName: 'getQuestionsFromQueue',
-      InvocationType: 'Event'
-     }, function(error, data) {
-      if (error) {
-        console.log('This is an error'+ error);
-      }
-      if(data){
-        console.log('This should show the payload'+ data.Payload);
-        // var arrOfSpeech = data.Payload.split('||');
-        // sessionAttributes.speechText = arrOfSpeech[0];
-        // handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-        // console.log(sessionAttributes.speechText);
-      }
-     });
-    test.then(data =>{
-      console.log(data)
-      console.log(data.Payload)
-    })
-    console.log('Test one'+ test.Payload)
+   var test = lambda.invoke({
+     FunctionName: 'getQuestionsFromQueue',
+     InvocationType: 'RequestResponse'
+   }, function (error, data) {
+     if (error) {
+       console.log('This is an error' + error);
+     }
+     if (data) {
+       console.log('This should show the payload' + data.Payload);
+       var arrOfSpeech = data.Payload.split('||');
+       speechText = arrOfSpeech[0];
+       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+       console.log(sessionAttributes.speechText);
+       return handlerInput.responseBuilder
+         .speak(speechText)
+         .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
+         .getResponse();
+     }
+   });
+    console.log('Test one'+ test)
     console.log('Im am here')
     // console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
