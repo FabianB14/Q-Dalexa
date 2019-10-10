@@ -86,8 +86,8 @@ const AskQuestionIntentHandler = {
        console.log('This should show the payload' + data.Payload);
      }
    }).promise();
-   sessionAttributes.questionAndAnswer = await questReturn;//.then(x =>JSON.parse((x.Payload)).split('||'));
-   sessionAttributes.questionAndAnswer = JSON.parse(sessionAttributes.questionAndAnswer).split('||');
+   sessionAttributes.questionAndAnswer = await questReturn.then(x =>JSON.parse((x.Payload)).split('||'));
+   //sessionAttributes.questionAndAnswer = sessionAttributes.questionAndAnswer.split('||');
    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     return handlerInput.responseBuilder
       .speak(sessionAttributes.questionAndAnswer[0])
