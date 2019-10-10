@@ -85,8 +85,10 @@ const AskQuestionIntentHandler = {
         console.log('This is an error'+ error);
       }
       if(data){
-       console.log('This should show the payload'+ data.Payload[0])
-        speechText = data.Payload[0];
+        let strData = JSON.parse(data.Payload);
+        console.log('This should show the payload'+ data.Payload);
+        var arrOfSpeech = data.Payload.split('||');
+        speechText = arrOfSpeech[0];
       }
      });
     return handlerInput.responseBuilder
