@@ -72,7 +72,7 @@ const AskQuestionIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'AskQuestionIntent';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     let speechText = 'Choose a different category difficulty or number of questions ';
    var questReturn = lambda.invoke({
@@ -86,12 +86,11 @@ const AskQuestionIntentHandler = {
        console.log('This should show the payload' + data.Payload);
      }
    }).promise();
-   sessionAttributes.questionAndAnswer = questReturn.then(x =>JSON.parse((x.Payload)).split('||'));
+   sessionAttributes.questionAndAnswer = await questReturn;//.then(x =>JSON.parse((x.Payload)).split('||'));
+   sessionAttributes.questionAndAnswer = JSON.parse(sessionAttributes.questionAndAnswer).split('||');
    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-    console.log('Question'+ questionAndAnswer.then(x => x[0]));
-    console.log('Answer'+ questionAndAnswer.then(x => x[1]));
     return handlerInput.responseBuilder
-      .speak(questionAndAnswer.then(x => JSON.parse(x[0])))
+      .speak(sessionAttributes.questionAndAnswer[0])
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }
