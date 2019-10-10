@@ -86,9 +86,9 @@ const AskQuestionIntentHandler = {
       }
       if(data){
         let strData = JSON.parse(data.Payload);
-        console.log('This should show the payload'+ strData);
-        speechText = strData[0];
-        
+        console.log('This should show the payload'+ data.Payload);
+        var arrOfSpeech = data.Payload.split('||');
+        speechText = arrOfSpeech[0];
       }
      });
     return handlerInput.responseBuilder
