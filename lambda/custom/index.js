@@ -38,9 +38,6 @@ const GameSetupIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GameSetupIntent';
   },
   handle(handlerInput) {
-  //  var category = handlerInput.requestEnvelope.request.intent.slots['Category'].value;
-  //  var difficulty = handlerInput.requestEnvelope.request.intent.slots.Difficulty.value;
-  //  var numberOfQuestions = handlerInput.requestEnvelope.request.intent.slots.NumberofQuestions.value;
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfQuestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
@@ -92,12 +89,12 @@ const AskQuestionIntentHandler = {
     var questionAndAnswer = questReturn.then(x =>JSON.parse((x.Payload)).split('||'))
     var question = questionAndAnswer.then(x => x[0])
     var answer = questionAndAnswer.then(x => x[1])
-    console.log('Question'+ question)
+    console.log('Question'+ questionAndAnswer.then(x => x[0]))
 
-    console.log('Answer'+ answer)
+    console.log('Answer'+ questionAndAnswer.then(x => x[1]))
     // console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
-      .speak(question)
+      .speak(questionAndAnswer.then(x => x[0]))
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }
