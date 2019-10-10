@@ -76,6 +76,7 @@ const AskQuestionIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AskQuestionIntent';
   },
   handle(handlerInput) {
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     let speechText = 'Choose a different category difficulty or number of questions ';
     lambda.invoke({
       FunctionName: 'getQuestionsFromQueue',
@@ -85,14 +86,16 @@ const AskQuestionIntentHandler = {
         console.log('This is an error'+ error);
       }
       if(data){
-        let strData = JSON.parse(data.Payload);
         console.log('This should show the payload'+ data.Payload);
         var arrOfSpeech = data.Payload.split('||');
-        speechText = arrOfSpeech[0];
+        sessionAttributes.speechText = arrOfSpeech[0];
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        console.log(speechText)
       }
      });
+    
     return handlerInput.responseBuilder
-      .speak(speechText)
+      .speak(sessionAttributes.speechText)
       .reprompt('You could choose categories like Japanese Anime and Manga, Video Games, Geography or Science and Nature')
       .getResponse();
   }
