@@ -93,9 +93,9 @@ const AskQuestionIntentHandler = {
         console.log(sessionAttributes.speechText);
       }
      });
-    console.log(test.Payload);
+    console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
-      .speak(sessionAttributes.speechText)
+      .speak('Ok look here')
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }
