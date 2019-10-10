@@ -94,7 +94,7 @@ const AskQuestionIntentHandler = {
     console.log('Answer'+ questionAndAnswer.then(x => x[1]))
     // console.log(sessionAttributes.speechText);
     return handlerInput.responseBuilder
-      .speak(questionAndAnswer.then(x => x[0]))
+      .speak(questionAndAnswer.then(x => JSON.parse(x[0])))
       .reprompt('You could choose categories like History, General Knowledge, Geography or Science and Nature')
       .getResponse();
   }

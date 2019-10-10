@@ -48,6 +48,18 @@
                     ]
                 },
                 {
+                    "name": "AnswerQuestionIntent",
+                    "slots": [
+                        {
+                            "name": "Answer",
+                            "type": "TrueFalse"
+                        }
+                    ],
+                    "samples": [
+                        "{Answer}"
+                    ]
+                },
+                {
                     "name": "GameSetupIntent",
                     "slots": [
                         {
@@ -80,6 +92,21 @@
                                     "Medium"
                                 ]
                             }
+                        },
+                        {
+                            "name": "TrueFalse",
+                            "values": [
+                                {
+                                    "name": {
+                                        "value": "false"
+                                    }
+                                },
+                                {
+                                    "name": {
+                                        "value": "true"
+                                    }
+                                }
+                            ]
                         },
                         {
                             "name": {
