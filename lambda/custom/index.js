@@ -78,7 +78,7 @@ const AskQuestionIntentHandler = {
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     let speechText = 'Choose a different category difficulty or number of questions ';
-    lambda.invoke({
+   var test = lambda.invoke({
       FunctionName: 'getQuestionsFromQueue',
       InvocationType: 'RequestResponse'
      }, function(error, data) {
@@ -93,7 +93,7 @@ const AskQuestionIntentHandler = {
         console.log(sessionAttributes.speechText);
       }
      });
-    
+    console.log(test);
     return handlerInput.responseBuilder
       .speak(sessionAttributes.speechText)
       .reprompt('You could choose categories like Japanese Anime and Manga, Video Games, Geography or Science and Nature')
