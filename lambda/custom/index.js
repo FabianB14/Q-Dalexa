@@ -12,6 +12,9 @@ const LaunchRequestHandler = {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
+      const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+      sessionAttributes.score = 0;
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
       const speechText = 'Welcome to Q an Dalexa, choose a mode.';
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -38,9 +41,13 @@ const GameSetupIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GameSetupIntent';
   },
   handle(handlerInput) {
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    sessionAttributes.score = 0;
     const difficulty = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Difficulty');
     const numberOfQuestions = Alexa.getSlotValue(handlerInput.requestEnvelope, 'NumberOfQuestions');
+    sessionAttributes.totalQs = numberOfQuestions;
     const category = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Category');
+    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     console.log(category)
     const speakOutput = 'I am generating your questions, when you are ready you can say start game or ready to go.';
     //const speechText = 'Ready to Start!';
@@ -87,7 +94,6 @@ const AskQuestionIntentHandler = {
      }
    }).promise();
    sessionAttributes.questionAndAnswer = await questReturn.then(x =>JSON.parse((x.Payload)).split('||'));
-   //sessionAttributes.questionAndAnswer = sessionAttributes.questionAndAnswer.split('||');
    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     return handlerInput.responseBuilder
       .speak(sessionAttributes.questionAndAnswer[0])
@@ -95,7 +101,40 @@ const AskQuestionIntentHandler = {
       .getResponse();
   }
 };
-  
+const AnswerIntentHandler = {
+  canHandle(handlerInput) {
+      return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+          && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AnswerIntent'
+  },
+  handle(handlerInput) {
+      var nextIntent = 'QueueUpQuestionIntent';
+      const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+      if (sessionAttributes.questionAndAnswer[0] !== 'game over, would you like to hear your score') {
+        const CorrectAnswer = sessionAttributes.questionAndAnswer[1].toLowerCase();
+        const Question = sessionAttributes.questionAndAnswer[0];
+      } else {
+        return handlerInput.responseBuilder
+          .speak('Your score is ' + sessionAttributes.score + ' correct answers out of ' + sessionAttributes.totalQs + ' total questions. If you would like to to play again just provide a number of questions and a difficulty.')
+          .reprompt('Your score is ' + sessionAttributes.score + ' correct answers out of ' + sessionAttributes.totalQs + ' total questions. If you would like to to play again just provide a number of questions and a difficulty.')
+          .getResponse();
+      }
+      const userAnswer = Alexa.getSlotValue(handlerInput.requestEnvelope, 'userAnswer');
+      var speakOutput = 'You got it'
+      if(userAnswer === CorrectAnswer) {
+          speakOutput += ' right. Please say ready for the next question.';
+          sessionAttributes.score++;
+          handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+          nextIntent = 'QueueUpQuestionIntent';
+      }
+      else {
+          speakOutput += ' wrong. Please say ready for the next question.';
+      }
+      return handlerInput.responseBuilder
+          .speak(speakOutput)
+          .reprompt(speakOutput)
+          .getResponse();
+  }
+}; 
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -192,6 +231,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     SatrtGameIntentHandler,
     GameSetupIntentHandler,
     AskQuestionIntentHandler,
+    AnswerIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
