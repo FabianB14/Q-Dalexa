@@ -15,7 +15,7 @@ const LaunchRequestHandler = {
       const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
       sessionAttributes.score = 0;
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-      const speechText = 'Welcome to Q an Dalexa, choose a mode.';
+      const speechText = 'Welcome to tenyks, choose a mode.';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
