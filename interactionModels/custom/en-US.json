@@ -27,7 +27,8 @@
                         "i know the answer",
                         "the answer is {userAnswer}",
                         "I have an answer",
-                        "{userAnswer}"
+                        "{userAnswer}",
+                        "yes"
                     ]
                 },
                 {
@@ -59,8 +60,7 @@
                     "samples": [
                         "start game",
                         "ready to go",
-                        "next question",
-                        "yes"
+                        "next question"
                     ]
                 },
                 
