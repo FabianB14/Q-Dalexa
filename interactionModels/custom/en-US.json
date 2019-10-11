@@ -32,19 +32,6 @@
                     ]
                 },
                 {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
-                    "samples": [
-                        "hello",
-                        "how are you",
-                        "say hi world",
-                        "say hi",
-                        "hi",
-                        "say hello world",
-                        "say hello"
-                    ]
-                },
-                {
                     "name": "StartGameIntent",
                     "slots": [],
                     "samples": [
@@ -60,7 +47,8 @@
                     "samples": [
                         "start game",
                         "ready to go",
-                        "next question"
+                        "next question",
+                        "ready"
                     ]
                 },
                 
